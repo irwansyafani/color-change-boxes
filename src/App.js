@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Desktop from "./components/desktop";
+import Mobile from "./components/mobile";
 
 function App() {
+  const [colors, setColors] = useState([
+    "#008ce7",
+    "#fa0954",
+    "#907957",
+    "#c6585e",
+    "#8b00d3",
+    "#00b49f",
+    "#007c66",
+    "#6d52ff",
+    "#415d6f",
+  ]);
+
+  const changeColor = () => {
+    const cloned = [...colors];
+    const lastColor = cloned.pop();
+    cloned.unshift(lastColor);
+    setColors(cloned);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Desktop colors={colors} changeColor={changeColor} />
+      <Mobile colors={colors} changeColor={changeColor} />
+    </>
   );
 }
 
